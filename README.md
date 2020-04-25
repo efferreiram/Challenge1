@@ -28,12 +28,13 @@ TeamName.[zip, rar, tar]
 +- Data - Where the videos or sampled images are
 | +- 2_1_21_1.jpg
 | +- 2_1_21_2.avi
+| +- ...
 ```
 
 **REMEMBER TO KEEP THE SAME FILENAMES(INCLUDING USE OF CAPS) FOR EASIER EVALUATION**
 
 ## Authors
-- Emilio Ferreira <A01020938@itesm.mx>
-- Jacob Rivera <A01184125@itesm.mx>
+- Emilio Ferreira @efferreiram <A01020938@itesm.mx>
+- Jacob Rivera @edjacob25 <A01184125@itesm.mx>
 
 If you have any questions or observations, don't hesitate to open an issue in github so everybody can see it after.
