@@ -14,10 +14,9 @@ class KerasLoader():
         model_path = self.base_path / f"Model{self.model_number}.h5"
         return load_model(model_path)
 
-    def predict(self, video_name: str) -> bool:
+    def predict(self, video_name: str) -> float:
         full_filename = (self.base_path / "Data" / video_name).with_suffix(".jpg")
         example = image.imread(full_filename)
         example = np.expand_dims(example, axis=0)
         result = self.model.predict(example)
-        result = result[0][0] >= 0.5
-        return result
+        return result[0][0]

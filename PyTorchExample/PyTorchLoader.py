@@ -20,9 +20,10 @@ class PyTorchLoader():
         net = PyTorchNN()
         model_path = self.base_path / f"Model{self.model_number}.pth"
         net.load_state_dict(torch.load(str(model_path))["state_dict"])
+        net.eval()
         return net
 
-    def predict(self, video_name: str) -> bool:
+    def predict(self, video_name: str) -> float:
         full_filename = (self.base_path / "Data" / video_name).with_suffix(".jpg")
         img = np.asarray(Image.open(full_filename))
         resized = cv.resize(img, (224, 224), interpolation=cv.INTER_AREA)
@@ -30,8 +31,7 @@ class PyTorchLoader():
         resized = np.expand_dims(resized, axis=0)
         tensor = torch.Tensor(resized)
         out = self.model.forward(tensor)
-
-        return out[1].item() > 0.5
+        return out[1].item()
 
 
 class PyTorchNN(Module):
