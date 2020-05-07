@@ -79,8 +79,8 @@ def calculate_metrics(values: List[Tuple[float, str]]) -> Tuple[float, float, fl
     # -1, -2 are attacks, +1 is not an attack -> True when attack, False otherwise
     true_boolean_values = [int(x) < 0 for x in true_values]
 
-    attack_count = true_boolean_values.count(False)
-    bonafide_count = true_boolean_values.count(True)
+    attack_count = true_boolean_values.count(True)
+    bonafide_count = true_boolean_values.count(False)
 
     apcers = []
     bpcers = []
