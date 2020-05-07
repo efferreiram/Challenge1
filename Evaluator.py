@@ -91,11 +91,13 @@ def calculate_metrics(values: List[Tuple[float, str]]) -> Dict[str, float]:
         threshold_results = [x >= threshold for x in predicted_values]
 
         # APCER
-        false_acceptance_rate = 1 - (1/attack_count) * sum([1 for ex, res in zip(true_boolean_values, threshold_results) if ex and res])
+        false_acceptance_rate = 1 - ((1 / attack_count) * sum(
+            [1 for ex, res in zip(true_boolean_values, threshold_results) if ex and res]))
         apcers.append(false_acceptance_rate)
 
         # BPCER
-        false_rejection_rate = sum([1 for ex, res in zip(true_boolean_values, threshold_results) if not ex and res]) / bonafide_count
+        false_rejection_rate = sum(
+            [1 for ex, res in zip(true_boolean_values, threshold_results) if not ex and res]) / bonafide_count
         bpcers.append(false_rejection_rate)
 
         # ACER
