@@ -42,7 +42,7 @@ def evaluate():
 
     print(f"Average time evaluating a partition: {mean(timings)}")
 
-    #final_res = mean([calculate_metrics(results[x]) for x in results])
+    # final_res = mean([calculate_metrics(results[x]) for x in results])
     final_res = [(key, calculate_metrics(results[key])) for key in results]
 
     # Calculate average execution time and append to end of list
@@ -52,7 +52,7 @@ def evaluate():
     avg_bpcer = mean([x["bpcer"] for _, x in final_res])
     avg_acer = mean([x["acer"] for _, x in final_res])
 
-    final_res.append(("avg", {"apcer": avg_apcer, "bpcer": avg_bpcer, "acer" : avg_acer}))
+    final_res.append(("avg", {"apcer": avg_apcer, "bpcer": avg_bpcer, "acer": avg_acer}))
     save_results(final_res, timings)
 
 
@@ -70,11 +70,11 @@ def load_filenames(partition: int) -> List[Tuple[str, str]]:
         return list(rows)
 
 
-def calculate_metrics(values: List[Tuple[float, str]]) -> Tuple[float, float, float]:
+def calculate_metrics(values: List[Tuple[float, str]]) -> Dict[str, float]:
     predicted_values = [x for (x, _) in values]
     true_values = [x for (_, x) in values]
 
-    threshold_values = [i/100 for i in range(101)]
+    threshold_values = [i / 100 for i in range(101)]
 
     # -1, -2 are attacks, +1 is not an attack -> True when attack, False otherwise
     true_boolean_values = [int(x) < 0 for x in true_values]
@@ -110,7 +110,7 @@ def calculate_metrics(values: List[Tuple[float, str]]) -> Tuple[float, float, fl
             min_i = i
             min_val = dif
 
-    return {"apcer": apcers[min_i], "bpcer": bpcers[min_i], "acer" : acers[min_i]}
+    return {"apcer": apcers[min_i], "bpcer": bpcers[min_i], "acer": acers[min_i]}
 
 
 evaluate()
